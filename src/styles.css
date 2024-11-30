@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@keyframes fadeUpDown {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    /* Start slightly below the normal position */
+  }
+
+  50% {
+    /* Normal position */
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+    /* End slightly above the normal position */
+  }
+}
+
+/* Apply the animation */
+.fade-up-down {
+  animation: fadeUpDown 3s 1;
+  /* 3s duration, infinite loop */
+}

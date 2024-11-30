@@ -1,0 +1,64 @@
+<div class="text-center text-light">
+  <h1 class="hero-title">Work</h1>
+</div>
+<ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+  <li>
+    <button (click)="setType('design')" class="reset-btn me-4">
+      <span [class]="typeSelected == 'design' ? 'text-active' : 'text-light'">Designs</span>
+    </button>
+  </li>
+  <li>
+    <button (click)="setType('reel')" class="reset-btn me-4">
+      <span [class]="typeSelected == 'reel' ? 'text-active' : 'text-light'">Reels</span>
+    </button>
+  </li>
+  <li>
+    <button (click)="setType('content')" class="reset-btn me-4">
+      <span [class]="typeSelected == 'content' ? 'text-active' : 'text-light'">Content Plans</span>
+    </button>
+  </li>
+  <li>
+    <button (click)="setType('campaign')" class="reset-btn me-4">
+      <span [class]="typeSelected == 'campaign' ? 'text-active' : 'text-light'">Campaigns</span>
+    </button>
+  </li>
+  <li>
+    <button (click)="setType('ad')" class="reset-btn me-4">
+      <span [class]="typeSelected == 'ad' ? 'text-active' : 'text-light'">Ads</span>
+    </button>
+  </li>
+</ul>
+
+<!-- DESIGNS, REELS, CAMPAIGNS, ADS -->
+<div *ngIf="typeSelected !== 'content'" class="gy-4 isotope-container fade-up-down" data-aos="fade-up"
+  data-aos-delay="200" style="columns:400px !important;">
+  <ng-container *ngFor="let item of allWork">
+    <div *ngIf="typeSelected === item.type?.stringValue"
+      class="col-lg-4 col-md-6 portfolio-item isotope-item w-100 mb-3">
+      <a [href]="item.url?.stringValue" target="_blank" class="portfolio-content h-100">
+        <img loading="lazy" [src]="item.img?.stringValue" class="img-fluid" alt="">
+      </a>
+    </div>
+  </ng-container>
+</div>
+
+<!-- CONTENT PLANS -->
+<ng-container *ngIf="typeSelected === 'content'">
+  <ng-container *ngFor="let item of allWork">
+    <div *ngIf="typeSelected === item.type?.stringValue" class="certificate px-3 mb-3 fade-up-down">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-lg-1 text-lg-end text-start">
+          <i class="fa-regular fa-file-pdf"></i>
+        </div>
+        <div class="col-lg-9">
+          <p class="mb-1 header-details">{{item.description?.stringValue}}</p>
+        </div>
+        <div class="col-lg-2 text-end">
+          <a href="{{item.url?.stringValue}}" target="_blank" class="btn downloadBtn text-light">
+            <i class="fa-solid fa-download"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
