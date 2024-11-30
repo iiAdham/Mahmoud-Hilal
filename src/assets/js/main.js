@@ -6,31 +6,38 @@ window.addEventListener('load', function() {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const navBtn = document.getElementById('navBtn');
-    const overlay = document.getElementById('overlay');
-    const closeOverlayBtn = document.getElementById('closeOverlay');
+  const navBtn = document.getElementById('navBtn');
+  const overlay = document.getElementById('overlay');
+  const closeOverlayBtn = document.getElementById('closeOverlay');
 
-    navBtn.addEventListener('click', () => {
-        overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
-    });
+  // Unified function to toggle overlay display
+  const toggleOverlay = () => {
+      overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+  };
 
-    closeOverlayBtn.addEventListener('click', () => {
-        overlay.style.display = 'none';
-    });
+  // Add event listeners for both click and touchstart
+  navBtn.addEventListener('click', toggleOverlay);
+  navBtn.addEventListener('touchstart', toggleOverlay);
 
-    window.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-            overlay.style.display = 'none';
-        }
-    });
+  const closeOverlay = () => {
+      overlay.style.display = 'none';
+  };
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            overlay.style.display = 'none';
-        }
-    });
+  closeOverlayBtn.addEventListener('click', closeOverlay);
+  closeOverlayBtn.addEventListener('touchstart', closeOverlay);
+
+  window.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+          closeOverlay();
+      }
+  });
+
+  document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+          closeOverlay();
+      }
+  });
 });
-
 
 const app = document.getElementById('app');
 
